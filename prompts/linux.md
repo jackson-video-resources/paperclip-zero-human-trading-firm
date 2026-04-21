@@ -338,7 +338,7 @@ After sending the brief, say: "CEO brief sent. Watch the org chart — agents wi
 Say: "Step 5 of 5: Opening your firm's command centre."
 
 ```bash
-xdg-open https://paperclip.ng 2>/dev/null || echo "Open https://paperclip.ng in your browser — your org chart will be filling in now."
+xdg-open http://localhost:3200 2>/dev/null || echo "Open http://localhost:3200 in your browser — your org chart will be filling in now."
 ```
 
 Say: "Your Paperclip workspace is open. You should see your org chart filling in — CEO at the top, your team below."

@@ -350,7 +350,7 @@ After sending the brief, say: "CEO brief sent. Watch the org chart — agents wi
 Say: "Step 5 of 5: Opening your firm's command centre."
 
 ```powershell
-Start-Process "https://paperclip.ng"
+Start-Process "http://localhost:3200"
 ```
 
 Say: "Your Paperclip workspace is open. You should see your org chart filling in — CEO at the top, your team below."
