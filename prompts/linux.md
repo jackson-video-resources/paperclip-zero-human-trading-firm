@@ -337,11 +337,32 @@ After sending the brief, say: "CEO brief sent. Watch the org chart — agents wi
 
 Say: "Step 5 of 5: Opening your firm's command centre."
 
+Find the newly created company's ID and open Paperclip with it pre-selected:
+
 ```bash
-xdg-open http://localhost:3200 2>/dev/null || echo "Open http://localhost:3200 in your browser — your org chart will be filling in now."
+node -e "
+const http = require('http');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+http.get('http://localhost:3200/api/companies', res => {
+  let data = '';
+  res.on('data', chunk => data += chunk);
+  res.on('end', () => {
+    const companies = JSON.parse(data);
+    const match = companies.find(c => c.name.toLowerCase() === '[FIRM NAME]'.toLowerCase());
+    if (!match) { console.error('Company not found'); process.exit(1); }
+    const html = '<script>localStorage.setItem(\"paperclip.selectedCompanyId\",\"' + match.id + '\");window.location.href=\"http://localhost:3200\";<\/script>';
+    const tmpFile = path.join(os.tmpdir(), 'paperclip-open.html');
+    fs.writeFileSync(tmpFile, html);
+    console.log(match.id);
+    require('child_process').exec('xdg-open ' + tmpFile + ' 2>/dev/null || xdg-open http://localhost:3200');
+  });
+});
+"
 ```
 
-Say: "Your Paperclip workspace is open. You should see your org chart filling in — CEO at the top, your team below."
+Say: "Your Paperclip workspace is open on [FIRM NAME]. You should see your org chart filling in — CEO at the top, your team below."
 
 ---
 
