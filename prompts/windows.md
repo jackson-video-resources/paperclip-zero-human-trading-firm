@@ -81,7 +81,7 @@ node -e "const k=process.env.ANTHROPIC_API_KEY; console.log(k&&k.startsWith('sk-
 Say: "Step 2 of 6: Installing Paperclip."
 
 ```bash
-node -e "require('child_process').exec('cmd /c start https://paperclip.ng')"
+node -e "require('child_process').exec('cmd /c start https://paperclip.ing')"
 npx paperclipai onboard
 ```
 
